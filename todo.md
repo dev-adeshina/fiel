@@ -308,3 +308,11 @@ Build SIMPLE internally
 Structure CLEANLY
 Expose APIs PROPERLY
 Scale GRADUALLY
+
+
+Done
+|-- Core Domains folders created [Auth, Customer, Menu, Cart, Order, Payment, Reservation, Admin, Shared]
+|-- Basic Laravel setup with Sanctum authentication
+|-- Database migrations for users, caches, jobs and personal access tokens
+|-- Created other Auth Domain resources (Repositories, Models, Services, Policies and others)
+|-- Modified users table migration to include uuid, avatar, status, last_login_at and soft deletes
