@@ -21,7 +21,10 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use HasRoles;
 
+    protected string $guard_name = 'web';
+
     protected $fillable = [
+        'uuid',
         'first_name',
         'last_name',
         'email',

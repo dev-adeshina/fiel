@@ -2,10 +2,12 @@
 
 namespace App\Domains\Auth\Notifications;
 
+use App\Domains\Auth\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+
 
 class WelcomeNotification extends Notification
 {
@@ -14,7 +16,7 @@ class WelcomeNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected string $restaurantName, protected string $dashboardUrl)
     {
         //
     }
@@ -35,8 +37,20 @@ class WelcomeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject(
+                "Welcome To {$this->restaurantName}"
+            )
+            ->greeting("Hello {$notifiable->first_name}!")
             ->line('The introduction to the notification.')
             ->action('Notification Action', url('/'))
+            ->line(
+                "Thank you for registering at {$this->restaurantName}."
+            )
+
+            ->action(
+                'Visit Dashboard',
+                $this->dashboardUrl
+            )
             ->line('Thank you for using our application!');
     }
 

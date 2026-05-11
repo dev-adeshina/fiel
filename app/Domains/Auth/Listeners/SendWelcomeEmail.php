@@ -17,7 +17,6 @@ class SendWelcomeEmail
      */
     public function handle(UserRegistered $event): void
     {
-        //
-        $event->user->notify(new WelcomeNotification());
+        $event->user->notify(new WelcomeNotification(restaurantName: config('app.name'), dashboardUrl: url('/dashboard'),));
     }
 }
