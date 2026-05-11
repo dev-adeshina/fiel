@@ -316,3 +316,6 @@ Done
 |-- Database migrations for users, caches, jobs and personal access tokens
 |-- Created other Auth Domain resources (Repositories, Models, Services, Policies and others)
 |-- Modified users table migration to include uuid, avatar, status, last_login_at and soft deletes
+|-- Implemented user repository and service with basic registration and login logic
+|-- Set up Sanctum for API authentication and created auth controller with register and login methods
+|-- Implemented the core basic authentication, login, register, logout
