@@ -8,10 +8,12 @@ use App\Domains\Auth\Repositories\UserRepository;
 use App\Domains\Auth\Services\TokenService;
 use App\Domains\Auth\Models\User;
 use App\Domains\Auth\DTOs\RegisterData;
+use App\Domains\Auth\Events\UserRegistered;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Auth\AuthenticationException;
+
 
 class AuthService 
 {
@@ -37,7 +39,7 @@ class AuthService
             $user->assignRole('customer');
 
             //event maker
-            // event(new UserRegistered($user));
+            event(new UserRegistered($user));
 
             return $user;
         });
