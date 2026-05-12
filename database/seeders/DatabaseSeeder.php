@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Domains\Auth\Models\User;
+use Database\Factories\MenuFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,12 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            MenuSeeder::class,
+        ]);
 
         Role::create([
             'name' => 'customer'

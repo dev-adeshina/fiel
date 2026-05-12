@@ -321,3 +321,4 @@ Done
 |-- Implemented the core basic authentication, login, register, logout
 |-- Completed Implementation of authentication [login, register, logout, verifyemail]
 |-- Starting the menu area
+|-- Implemented Menu migrations, models, seeders and factories
