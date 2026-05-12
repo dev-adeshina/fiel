@@ -2,7 +2,9 @@
 
 namespace App\Domains\Auth\Actions;
 
+use App\Domains\Auth\DTOs\ForgotPasswordData;
 use App\Domains\Auth\Services\PasswordService;
+
 
 class ForgotPasswordAction 
 {
@@ -10,12 +12,11 @@ class ForgotPasswordAction
         protected PasswordService $passwords
     ) {}
 
-    public function execute(
-        string $email
-    ): void {
+    public function execute(ForgotPasswordData $data): void 
+    {
 
         $this->passwords->sendResetLink(
-            $email
+            $data->email
         );
     }
 }

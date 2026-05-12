@@ -5,14 +5,14 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,29 +22,14 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
 
-            'first_name' => [
+            'current_password' => [
                 'required',
                 'string',
-                'max:255',
             ],
 
-            'last_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                'unique:users,email',
-            ],
-
-            'password' => [
+            'new_password' => [
                 'required',
                 'string',
                 'min:8',
@@ -54,13 +39,18 @@ class RegisterRequest extends FormRequest
         ];
     }
 
+    /**
+     * Custom Messages
+     */
     public function messages(): array
     {
         return [
 
-            'email.unique' => 'This email is already registered.',
+            'current_password.required' =>
+                'Current password is required.',
 
-            'password.confirmed' => 'Passwords do not match.',
+            'new_password.confirmed' =>
+                'New password confirmation does not match.',
 
         ];
     }

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class DeleteAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,45 +22,25 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-
-            'first_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'last_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                'unique:users,email',
-            ],
 
             'password' => [
                 'required',
-                'string',
-                'min:8',
-                'confirmed',
+                'current_password',
             ],
 
         ];
     }
 
+    /**
+     * Custom Messages
+     */
     public function messages(): array
     {
         return [
 
-            'email.unique' => 'This email is already registered.',
-
-            'password.confirmed' => 'Passwords do not match.',
+            'password.current_password' =>
+                'The password provided is incorrect.',
 
         ];
     }

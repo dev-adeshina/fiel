@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Domains\Auth\Actions\VerifyEmailAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\VerifyEmailRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+
+
 class VerifyEmailController extends Controller
 {
-    //
 
-    public function __invoke(Request $request, VerifyEmailAction $action): JsonResponse
+    public function __invoke(VerifyEmailRequest $request, VerifyEmailAction $action): JsonResponse
     {
         $action->execute($request->user());
 
