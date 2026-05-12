@@ -319,3 +319,4 @@ Done
 |-- Implemented user repository and service with basic registration and login logic
 |-- Set up Sanctum for API authentication and created auth controller with register and login methods
 |-- Implemented the core basic authentication, login, register, logout
+|-- Completed Implementation of authentication [login, register, logout, verifyemail]
