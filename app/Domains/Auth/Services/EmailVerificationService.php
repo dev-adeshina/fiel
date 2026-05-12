@@ -17,7 +17,7 @@ class EmailVerificationService {
             return;
         }
 
-        $user->markEmailAsUnverified();
+        $user->markEmailAsVerified();
 
         event(new EmailVerified($user));
     }

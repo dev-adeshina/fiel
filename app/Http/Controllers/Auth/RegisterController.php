@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Domains\Auth\Actions\RegisterUserAction;
 use App\Domains\Auth\DTOs\RegisterData;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\Auth\RegisterRequest;
 
 
@@ -17,7 +18,10 @@ class RegisterController extends Controller
 
         return response()->json([
             'message'   => 'Register Successfully',
-            'data'      => $user
+            'data'      => [
+                'user'  => new UserResource($user['user']),
+                'token' => $user['token']
+            ]
         ]);
     }
 }

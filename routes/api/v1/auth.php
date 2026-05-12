@@ -49,6 +49,8 @@ Route::prefix('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
 
+    Route::get('/email/verify/{id}/{hash}', VerifyEmailController::class)->middleware(['auth:sanctum','signed'])->name('verification.verify');
+    
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /*
@@ -78,15 +80,6 @@ Route::prefix('auth')->group(function () {
         |--------------------------------------------------------------------------
         */
 
-        // Route::post(
-        //     '/email/verify',
-        //     VerifyEmailController::class
-        // );
-
-        Route::get(
-            '/email/verify/{id}/{hash}',
-            VerifyEmailController::class
-        )->middleware(['signed']);
 
         Route::post(
             '/email/resend',

@@ -13,7 +13,7 @@ class RegisterUserAction {
     public function __construct(protected AuthService $auth) {}
 
 
-    public function execute(RegisterData $data) : User
+    public function execute(RegisterData $data) : array
     {
         return $this->auth->register($data);
     }

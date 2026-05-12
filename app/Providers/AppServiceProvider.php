@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use App\Domains\Auth\Events\UserRegistered;
 use App\Domains\Auth\Listeners\SendAccountDeleted;
+use App\Domains\Auth\Listeners\SendEmailVerificationNotification;
 use App\Domains\Auth\Listeners\SendEmailVerified;
 use App\Domains\Auth\Listeners\SendPasswordChanged;
 use App\Domains\Auth\Listeners\SendWelcomeEmail;
@@ -28,8 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+         //
         Event::listen(UserRegistered::class, SendWelcomeEmail::class);
+        Event::listen(UserRegistered::class,  SendEmailVerificationNotification::class);
         Event::listen(AccountDeleted::class, SendAccountDeleted::class);
         Event::listen(PasswordChanged::class, SendPasswordChanged::class);
         Event::listen(EmailVerified::class, SendEmailVerified::class);

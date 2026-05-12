@@ -23,9 +23,9 @@ class AuthService
     ) {}
 
 
-    public function register(RegisterData $data) : User
+    public function register(RegisterData $data) : array
     {
-        return DB::transaction(function() use ($data) {
+        $user =  DB::transaction(function() use ($data) {
             
             $user = $this->users->create([
                 'uuid'          => Str::Uuid(),
@@ -39,10 +39,19 @@ class AuthService
             $user->assignRole('customer');
 
             //event maker
+            
             event(new UserRegistered($user));
-
             return $user;
         });
+
+
+        $token = $this->token->generate($user);
+
+
+        return [
+            'user' => $user,
+            'token' => $token
+        ];
     }
 
 
