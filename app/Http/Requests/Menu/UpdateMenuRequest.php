@@ -12,7 +12,7 @@ class UpdateMenuRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,33 @@ class UpdateMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'name' => [
+                'sometimes',
+                'string',
+                'max:255',
+            ],
+
+            'description' => [
+                'nullable',
+                'string',
+            ],
+
+            'is_active' => [
+                'sometimes',
+                'boolean',
+            ],
+
+            'start_date' => [
+                'nullable',
+                'date',
+            ],
+
+            'end_date' => [
+                'nullable',
+                'date',
+                'after:start_date',
+            ],
         ];
     }
 }

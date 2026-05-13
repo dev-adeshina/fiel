@@ -2,8 +2,10 @@
 
 namespace App\Domains\Menu\Repositories;
 
+use Illuminate\Support\Str;
 use App\Domains\Menu\Models\Menu;
 use Illuminate\Database\Eloquent\Collection;
+
 
 class MenuRepository 
 {
@@ -35,9 +37,16 @@ class MenuRepository
         return Menu::create($data);
     }
 
-    public function update(Menu $menu, array $data): bool
+    public function update(Menu $menu, array $data): Menu
     {
-        return $menu->update($data);
+        if (isset($data['name'])) {
+
+            $data['slug'] = Str::slug($data['name']);
+        }
+
+        $menu->update($data);
+
+        return $menu->refresh();
     }
 
     public function delete(Menu $menu): bool

@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/', [MenuController::class, 'index']);
 
-        Route::post('/', [MenuController::class, 'store']);
+        
     });
 
     Route::prefix('menu-items')->group(function () {
@@ -27,6 +27,6 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/{slug}', [MenuItemController::class, 'show']);
 
-        Route::post('/', [MenuItemController::class, 'store']);
+        
     });
 });

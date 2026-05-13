@@ -21,7 +21,7 @@ class MenuService
         return $this->menus->create($data);
     }
 
-    public function update(Menu $menu, array $data): bool
+    public function update(Menu $menu, array $data): Menu
     {
         if (isset($data['name'])) {
 
@@ -49,4 +49,5 @@ class MenuService
     {
         return $this->menus->delete($menu);
     }
+ 
 }
