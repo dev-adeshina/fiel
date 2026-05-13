@@ -12,7 +12,7 @@ class CreateMenuItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,68 @@ class CreateMenuItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'menu_category_id' => [
+                'required',
+                'exists:menu_categories,id',
+            ],
+
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+
+            'description' => [
+                'nullable',
+                'string',
+            ],
+
+            'price' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'compare_price' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'cost_price' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'calories' => [
+                'nullable',
+                'integer',
+                'min:0',
+            ],
+
+            'preparation_time' => [
+                'nullable',
+                'integer',
+                'min:0',
+            ],
+
+            'is_featured' => [
+                'nullable',
+                'boolean',
+            ],
+
+            'is_available' => [
+                'nullable',
+                'boolean',
+            ],
+
+            'status' => [
+                'required',
+                'in:draft,published,archived',
+            ],
+
         ];
     }
 }

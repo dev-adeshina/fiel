@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Menu\MenuController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Menu\MenuController;
+use App\Http\Controllers\Menu\MenuItemController;
 
 
 Route::get('/user', function (Request $request) {
@@ -17,5 +19,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
 
         Route::post('/', [MenuController::class, 'store']);
+    });
+
+    Route::prefix('menu-items')->group(function () {
+
+        Route::get('/', [MenuItemController::class, 'index']);
+
+        Route::get('/{slug}', [MenuItemController::class, 'show']);
+
+        Route::post('/', [MenuItemController::class, 'store']);
     });
 });
