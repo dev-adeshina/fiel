@@ -27,7 +27,7 @@ class MenuItemService
         return $this->items->create($data);
     }
 
-    public function update(MenuItem $item, array $data): bool
+    public function update(MenuItem $item, array $data): MenuItem
     {
         if (isset($data['name'])) {
 
@@ -64,4 +64,5 @@ class MenuItemService
     {
         return $this->items->delete($item);
     }
+
 }

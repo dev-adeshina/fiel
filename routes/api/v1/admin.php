@@ -13,13 +13,15 @@ Route::prefix('admin')->group(function () {
     Route::prefix('menus')->group(function () {
 
         Route::post('/', [MenuController::class, 'store']);
-        Route::patch('/admin/menus/{menu}', [MenuController::class, 'update'])->middleware('auth:sanctum');
+        Route::patch('/{menu}', [MenuController::class, 'update'])->middleware('auth:sanctum');
         Route::delete('/{menu}', [MenuController::class, 'destroy']);
     });
 
     Route::prefix('menu-items')->group(function () {
 
         Route::post('/', [MenuItemController::class, 'store']);
+        Route::patch('/{menuItem}', [MenuItemController::class, 'update']);
+        Route::delete('/{menuItem}',[MenuItemController::class, 'destroy']);
     });
 
     });

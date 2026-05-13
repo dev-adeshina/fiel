@@ -5,8 +5,7 @@ namespace App\Domains\Menu\Repositories;
 use App\Domains\Menu\Models\MenuItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-
-
+use Illuminate\Support\Str;
 
 
 
@@ -73,9 +72,18 @@ class MenuItemRepository
         return MenuItem::create($data);
     }
 
-    public function update(MenuItem $item, array $data): bool
+    public function update(MenuItem $item, array $data): MenuItem
     {
-        return $item->update($data);
+        // return $item->update($data);
+
+        if (isset($data['name'])) {
+
+            $data['slug'] = Str::slug($data['name']);
+        }
+
+        $item->update($data);
+
+        return $item->refresh();
     }
 
     public function delete(MenuItem $item): bool
