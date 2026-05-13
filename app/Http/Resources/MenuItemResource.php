@@ -55,6 +55,8 @@ class MenuItemResource extends JsonResource
             'availability' => MenuItemAvailabilityResource::collection(
                 $this->whenLoaded('availabilities')
             ),
+
+            'image_url' => $this->image_path ? asset('storage/' . $this->image_path) : null,
         ];
     }
 }

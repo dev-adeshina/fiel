@@ -84,6 +84,12 @@ class CreateMenuItemRequest extends FormRequest
                 'required',
                 'in:draft,published,archived',
             ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
 
         ];
     }

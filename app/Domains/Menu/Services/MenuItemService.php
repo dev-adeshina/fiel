@@ -5,11 +5,15 @@ namespace App\Domains\Menu\Services;
 use Illuminate\Support\Str;
 use App\Domains\Menu\Models\MenuItem;
 use App\Domains\Menu\Repositories\MenuItemRepository;
+use App\Shared\Services\ImageUploadService;
+
+
 
 class MenuItemService 
 {
     public function __construct(
-        protected MenuItemRepository $items
+        protected MenuItemRepository $items,
+        protected ImageUploadService $images,
     ) {}
 
     public function create(array $data): MenuItem
@@ -24,6 +28,16 @@ class MenuItemService
             'MENU-' . Str::random(8)
         );
 
+        if (isset($data['image'])) {
+
+            $data['image_path'] = $this->images->upload(
+                $data['image'],
+                'menu-items'
+            );
+
+            unset($data['image']);
+        }
+
         return $this->items->create($data);
     }
 
@@ -36,6 +50,17 @@ class MenuItemService
             );
         }
 
+        if (isset($data['image'])) {
+
+            $this->images->delete($item->image_path);
+
+            $data['image_path'] = $this->images->upload(
+                $data['image'],
+                'menu-items'
+            );
+
+            unset($data['image']);
+        }
         return $this->items->update($item, $data);
     }
 

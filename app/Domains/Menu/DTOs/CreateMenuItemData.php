@@ -18,6 +18,7 @@ class CreateMenuItemData
         public readonly bool $isFeatured,
         public readonly bool $isAvailable,
         public readonly string $status,
+        public readonly mixed $image,
     ) {}
 
     public static function fromRequest(
@@ -46,6 +47,8 @@ class CreateMenuItemData
             isAvailable: $request->boolean('is_available', true),
 
             status: $request->input('status', 'published'),
+            image: $request->file('image'),
+            
         );
     }
 
@@ -74,6 +77,8 @@ class CreateMenuItemData
             'is_available' => $this->isAvailable,
 
             'status' => $this->status,
+            
+            'image' => $this->image,
         ];
     }
 }

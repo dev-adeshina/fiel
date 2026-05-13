@@ -84,6 +84,12 @@ class UpdateMenuItemRequest extends FormRequest
                 'sometimes',
                 'in:draft,published,archived',
             ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
         ];
     }
 }

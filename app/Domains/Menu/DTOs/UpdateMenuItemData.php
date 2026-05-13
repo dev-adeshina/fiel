@@ -18,6 +18,7 @@ class UpdateMenuItemData
         public readonly ?bool $isFeatured,
         public readonly ?bool $isAvailable,
         public readonly ?string $status,
+        public readonly mixed $image,
     ) {}
 
     public static function fromRequest(
@@ -46,6 +47,7 @@ class UpdateMenuItemData
             isAvailable: $request->is_available,
 
             status: $request->status,
+            image: $request->file('image'),
         );
     }
 
@@ -74,6 +76,8 @@ class UpdateMenuItemData
             'is_available' => $this->isAvailable,
 
             'status' => $this->status,
+
+            'image' => $this->image,
 
         ], fn ($value) => ! is_null($value));
     }
