@@ -36,9 +36,12 @@ class MenuCategoryRepository
         return MenuCategory::create($data);
     }
 
-    public function update(MenuCategory $category, array $data): bool
+    public function update(MenuCategory $category, array $data): MenuCategory
     {
-        return $category->update($data);
+
+        $category->update($data);
+
+        return $category->refresh();
     }
 
     public function delete(MenuCategory $category): bool
