@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Menu\MenuController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\Menu\MenuItemModifierController;
 use App\Http\Controllers\Menu\MenuItemVariantController;
 
 
@@ -31,7 +32,11 @@ Route::prefix('admin')->group(function () {
             Route::patch('/{variant}', [MenuItemVariantController::class, 'update']);
             Route::delete('/{variant}', [MenuItemVariantController::class, 'destroy']);
         });
-       
+
+        Route::prefix('menu-item-modifiers')->group(function () {
+            Route::post('/', [MenuItemModifierController::class, 'store']);
+        });
+               
     });
 
 });
