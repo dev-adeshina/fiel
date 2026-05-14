@@ -42,6 +42,13 @@ class MenuItemAvailability extends Model
         return $this->belongsTo(MenuItem::class, 'menu_item_id');
     }
 
+    public function menuItem()
+    {
+        return $this->belongsTo(
+            MenuItem::class
+        );
+    }
+
     protected static function newFactory(): MenuItemAvailabilityFactory
     {
         return MenuItemAvailabilityFactory::new();
