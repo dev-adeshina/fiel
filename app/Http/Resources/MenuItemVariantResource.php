@@ -14,6 +14,23 @@ class MenuItemVariantResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+
+            'id' => $this->id,
+
+            'uuid' => $this->uuid,
+
+            'name' => $this->name,
+
+            'sku' => $this->sku,
+
+            'price' => $this->price,
+
+            'price_adjustment' => $this->price_adjustment,
+
+            'is_default' => $this->is_default,
+
+            'sort_order' => $this->sort_order,
+        ];
     }
 }

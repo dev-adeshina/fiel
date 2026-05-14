@@ -40,4 +40,9 @@ class MenuItemVariant extends Model
     {
         return MenuItemVariantFactory::new();
     }
+
+    public function menuItem()
+    {
+        return $this->belongsTo(MenuItem::class);
+    }
 }
