@@ -32,12 +32,21 @@ class MenuItemController extends Controller
 
     public function index(): JsonResponse
     {
-        $items = $this->items->paginate();
+        $items = $this->items->paginatePublic(request('per_page', 15));
 
         return response()->json([
             'message' => 'Menu items retrieved successfully.',
 
             'data' => MenuItemResource::collection($items),
+            'meta' => [
+                'current_page' => $items->currentPage(),
+
+                'last_page' => $items->lastPage(),
+
+                'per_page' => $items->perPage(),
+
+                'total' => $items->total(),
+            ],
         ]);
     }
 
@@ -59,7 +68,8 @@ class MenuItemController extends Controller
         ]);
     }
 
-    public function store(CreateMenuItemRequest $request, CreateMenuItemAction $action ): JsonResponse {
+    public function store(CreateMenuItemRequest $request, CreateMenuItemAction $action ): JsonResponse 
+    {
 
         $dto = CreateMenuItemData::fromRequest($request);
 

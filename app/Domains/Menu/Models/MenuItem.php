@@ -2,12 +2,14 @@
 
 namespace App\Domains\Menu\Models;
 
+
 use Database\Factories\MenuItemFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Domains\Menu\Services\MenuAvailabilityService;
 
 
 class MenuItem extends Model
@@ -47,6 +49,8 @@ class MenuItem extends Model
         ];
     }
 
+    protected $appends = ['currently_available',];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(MenuCategory::class, 'menu_category_id');
@@ -65,6 +69,11 @@ class MenuItem extends Model
     public function availabilities(): HasMany
     {
         return $this->hasMany(MenuItemAvailability::class);
+    }
+
+    public function getCurrentlyAvailableAttribute(): bool
+    {
+        return app(MenuAvailabilityService::class)->isAvailableNow($this);
     }
 
     protected static function newFactory(): MenuItemFactory

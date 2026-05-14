@@ -57,6 +57,8 @@ class MenuItemResource extends JsonResource
             ),
 
             'image_url' => $this->image_path ? asset('storage/' . $this->image_path) : null,
+
+            'currently_available' => $this->currently_available,
         ];
     }
 }

@@ -36,6 +36,9 @@ class MenuCategoryResource extends JsonResource
             'image_url' => $this->image_path
                 ? asset('storage/' . $this->image_path)
                 : null,
+            'menu_items' => MenuItemResource::collection(
+                $this->whenLoaded('menuItems')
+            ),
         ];
     }
 }
