@@ -35,6 +35,8 @@ Route::prefix('admin')->group(function () {
 
         Route::prefix('menu-item-modifiers')->group(function () {
             Route::post('/', [MenuItemModifierController::class, 'store']);
+            Route::patch('/{modifier}',[MenuItemModifierController::class, 'update']);
+            Route::delete('/{modifier}', [MenuItemModifierController::class, 'destroy']);
         });
                
     });
