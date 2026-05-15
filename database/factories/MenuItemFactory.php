@@ -38,7 +38,8 @@ class MenuItemFactory extends Factory
 
             'slug' => Str::slug($name . '-' . Str::random(5)),
 
-            'sku' => strtoupper(fake()->bothify('SKU-#####')),
+            // 'sku' => strtoupper(fake()->bothify('SKU-#####')),
+            'sku' => strtoupper(fake()->unique(true)->bothify('SKU-#####')),
 
             'description' => fake()->paragraph(),
 
