@@ -7,6 +7,7 @@ use App\Http\Controllers\Menu\MenuItemController;
 use App\Http\Controllers\Menu\MenuItemModifierController;
 use App\Http\Controllers\Menu\MenuItemVariantController;
 use App\Http\Controllers\Menu\MenuCategoryController;
+use App\Http\Controllers\Order\OrderStatusController;
 
 
 Route::prefix('admin')->group(function () {
@@ -46,6 +47,12 @@ Route::prefix('admin')->group(function () {
             Route::patch('/{category}', [MenuCategoryController::class, 'update']);
 
             Route::delete('/{category}', [MenuCategoryController::class, 'destroy']);
+        });
+
+        Route::prefix('orders')->group(function () {
+
+            Route::patch('/{order}/status', [OrderStatusController::class, 'update']);
+
         });
                
     });
