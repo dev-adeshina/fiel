@@ -7,7 +7,9 @@ use App\Http\Controllers\Menu\MenuItemController;
 use App\Http\Controllers\Menu\MenuItemModifierController;
 use App\Http\Controllers\Menu\MenuItemVariantController;
 use App\Http\Controllers\Menu\MenuCategoryController;
+use App\Http\Controllers\Order\KitchenController;
 use App\Http\Controllers\Order\OrderStatusController;
+
 
 
 Route::prefix('admin')->group(function () {
@@ -53,6 +55,10 @@ Route::prefix('admin')->group(function () {
 
             Route::patch('/{order}/status', [OrderStatusController::class, 'update']);
 
+        });
+
+        Route::prefix('kitchen')->group(function () {
+            Route::get('/', [KitchenController::class, 'index']);
         });
                
     });

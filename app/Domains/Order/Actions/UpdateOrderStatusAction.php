@@ -11,7 +11,7 @@ class UpdateOrderStatusAction
     public function execute(Order $order, OrderStatus $status): Order 
     {
 
-        $data = [ 'status' => $status,];
+        $data = ['status' => $status,];
 
         /*
         |--------------------------------------------------------------------------
@@ -19,14 +19,38 @@ class UpdateOrderStatusAction
         |--------------------------------------------------------------------------
         */
 
-        match ($status) {
+        if ($status === OrderStatus::Confirmed) {
 
-            OrderStatus::Confirmed => $data['confirmed_at'] = now(),
+            $data['confirmed_at'] = now();
+        }
 
-            OrderStatus::Completed => $data['completed_at'] = now(),
+        if ($status === OrderStatus::Preparing) {
 
-            default => null,
-        };
+            $data['preparation_started_at'] = now();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Default estimated prep time
+            |--------------------------------------------------------------------------
+            */
+
+            $data['estimated_preparation_time']  = 20;
+        }
+
+        if ($status === OrderStatus::Ready) {
+
+            $data['ready_at'] = now();
+
+            if ($order->preparation_started_at) {
+
+                $data['actual_preparation_time'] = now()->diffInMinutes( $order->preparation_started_at );
+            }
+        }
+
+        if ($status === OrderStatus::Completed) {
+
+            $data['completed_at'] = now();
+        }
 
         $order->update($data);
 

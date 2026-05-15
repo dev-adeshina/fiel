@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Domains\Order\Models\OrderItem;
+use App\Domains\Payment\Models\Payment;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -81,6 +82,12 @@ class Order extends Model
 
             'completed_at'
                 => 'datetime',
+                
+            'preparation_started_at'
+                => 'datetime',
+
+            'ready_at'
+                => 'datetime',
         ];
     }
 
@@ -94,5 +101,10 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }
