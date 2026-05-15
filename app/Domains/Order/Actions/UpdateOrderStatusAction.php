@@ -5,6 +5,7 @@ namespace App\Domains\Order\Actions;
 use App\Domains\Order\Models\Order;
 
 use App\Domains\Order\Enums\OrderStatus;
+use App\Domains\Order\Notifications\OrderStatusUpdatedNotification;
 
 class UpdateOrderStatusAction
 {
@@ -53,6 +54,13 @@ class UpdateOrderStatusAction
         }
 
         $order->update($data);
+
+        if ($order->user) {
+
+            $order->user->notify(
+                new OrderStatusUpdatedNotification($order)
+            );
+        }
 
         return $order->refresh();
     }

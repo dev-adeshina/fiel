@@ -4,27 +4,26 @@ namespace App\Http\Controllers\Order;
 
 use App\Domains\Order\Repositories\OrderRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\KitchenOrderResource;
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 
 
-class KitchenController extends Controller
+class KitchenMetricsController extends Controller
 {
     public function __construct(
         protected OrderRepository $orders
     ) {}
 
-    public function index(): JsonResponse
+    public function __invoke(): JsonResponse
     {
-        $orders = $this->orders->kitchenQueue();
-
         return response()->json([
-            'message' => 'Kitchen queue retrieved successfully.',
 
-            'data' => KitchenOrderResource::collection( $orders),
+            'message'
+                => 'Kitchen metrics retrieved successfully.',
+
+            'data'
+                => $this->orders->kitchenMetrics(),
         ]);
     }
 }
