@@ -20,13 +20,26 @@ class DatabaseSeeder extends Seeder
     {
         
 
-        $this->call([
-            MenuSeeder::class,
-            RoleSeeder::class
+        // $this->call([
+        //     MenuSeeder::class,
+        // ]);
+
+        $this->call(RoleSeeder::class);
+
+        Role::create([
+            'name' => 'customer'
         ]);
 
+        Role::create([
+            'name' => 'admin'
+        ]);
 
+        Role::create([
+            'name' => 'manager'
+        ]);
 
-        
+        Role::create([
+            'name' => 'staff'
+        ]);
     }
 }

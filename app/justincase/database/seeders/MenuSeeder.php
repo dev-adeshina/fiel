@@ -10,7 +10,7 @@ use App\Domains\Menu\Models\MenuItem;
 use App\Domains\Menu\Models\MenuItemAvailability;
 use App\Domains\Menu\Models\MenuItemModifier;
 use App\Domains\Menu\Models\MenuItemVariant;
-use Spatie\Permission\Models\Role;
+
 
 
 class MenuSeeder extends Seeder
@@ -20,21 +20,7 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create([
-            'name' => 'customer'
-        ]);
-
-        Role::create([
-            'name' => 'admin'
-        ]);
-
-        Role::create([
-            'name' => 'manager'
-        ]);
-
-        Role::create([
-            'name' => 'staff'
-        ]);
+        
 
             Menu::factory()
             ->count(2)

@@ -43,6 +43,12 @@ app
 │   │   ├── Gateways
 │   │   ├── Services
 │   │   └── DTOs
+|   |
+|   ├── Inventory --
+│   │   ├── Controllers
+│   │   ├── Gateways
+│   │   ├── Services
+│   │   └── DTOs
 │   │
 │   ├── Reservation
 │   │   ├── Controllers
