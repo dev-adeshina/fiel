@@ -39,6 +39,8 @@ class PaystackWebhookController extends Controller
             return response('Invalid signature', 401);
         }
 
+        
+            
         /*
         |--------------------------------------------------------------------------
         | Get event payload
@@ -66,6 +68,16 @@ class PaystackWebhookController extends Controller
 
                 Log::error( $e->getMessage());
             }
+        }
+
+        if (! hash_equals($computedSignature, $signature))
+        {
+                $event = $payload['event'] ?? null;
+
+                Log::error('Paystack webhook failed.', [
+                    'reference' => $reference,
+                    'message' => $e->getMessage(),
+                ]);
         }
 
         return response( 'Webhook handled', 200 );

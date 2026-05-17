@@ -5,12 +5,13 @@ namespace App\Domains\Payment\Actions;
 use Exception;
 
 use App\Domains\Order\Models\Order;
-
+use App\Domains\Order\Enums\OrderStatus;
 use App\Domains\Payment\Models\Payment;
-
 use App\Domains\Payment\Repositories\PaymentRepository;
-
 use App\Domains\Payment\Gateways\PaystackGateway;
+use Illuminate\Support\Facades\DB;
+
+
 
 class VerifyPaymentAction
 {
@@ -104,39 +105,28 @@ class VerifyPaymentAction
             );
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Update payment
-        |--------------------------------------------------------------------------
-        */
 
-        $payment = $this->payments
-            ->updateStatus(
+        return DB::transaction(function () use ($payment, $response) 
+        {
 
-                $payment,
+            $payment = $this->payments->updateStatus($payment, 'paid', $response);
 
-                'paid',
+            $order = $payment->order;
 
-                $response
-            );
+            $order->update([
 
-        /*
-        |--------------------------------------------------------------------------
-        | Update order
-        |--------------------------------------------------------------------------
-        */
+                'payment_status' => 'paid',
 
-        $order = $payment->order;
+                'status' => OrderStatus::Confirmed,
 
-        $order->update([
+                'confirmed_at' => now(),
+            ]);
 
-            'payment_status'
-                => 'paid',
+            return $payment->refresh();
 
-            'status'
-                => 'confirmed',
-        ]);
-
-        return $payment;
+        });
+        
     }
+
+    
 }

@@ -30,6 +30,9 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware('api')
             ->prefix('api/v1')
             ->group(base_path('routes/api/v1/payment.php'));
+            Route::middleware('api')
+            ->prefix('api/v1')
+            ->group(base_path('routes/api/v1/reservation.php'));
         }
     )
     
