@@ -21,6 +21,8 @@ class MenuCategoryResource extends Resource
     protected static ?string $model = MenuCategory::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    
+    protected static string|\UnitEnum|null $navigationGroup = 'Menu';
 
     protected static ?string $recordTitleAttribute = 'menu_categories';
 

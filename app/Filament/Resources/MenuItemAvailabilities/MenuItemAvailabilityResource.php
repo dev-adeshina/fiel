@@ -22,6 +22,8 @@ class MenuItemAvailabilityResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Menu';
+
     protected static ?string $recordTitleAttribute = 'menu_item_availabilities';
 
     public static function form(Schema $schema): Schema

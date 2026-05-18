@@ -22,6 +22,8 @@ class MenuItemModifierResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Menu';
+
     protected static ?string $recordTitleAttribute = 'menu_item_modifiers';
 
     public static function form(Schema $schema): Schema

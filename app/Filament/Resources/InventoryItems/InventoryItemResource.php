@@ -22,6 +22,8 @@ class InventoryItemResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Inventory';
+
     protected static ?string $recordTitleAttribute = 'inventory_items';
 
     public static function form(Schema $schema): Schema
