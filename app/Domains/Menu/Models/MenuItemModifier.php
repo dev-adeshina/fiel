@@ -34,7 +34,7 @@ class MenuItemModifier extends Model
         ];
     }
 
-    public function item(): BelongsTo
+    public function menuItem(): BelongsTo
     {
         return $this->belongsTo(MenuItem::class, 'menu_item_id');
     }

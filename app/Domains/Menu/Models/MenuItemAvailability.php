@@ -17,14 +17,12 @@ class MenuItemAvailability extends Model
     protected $fillable = [
         'uuid',
         'menu_item_id',
-        'name',
         'description',
-        'sku',
-        'price',
-        'price_adjustment',
-        'is_default',
-        'is_active',
-        'sort_order',
+        'day_of_week',
+        'start_time',
+        'end_time',
+        'is_available',
+
     ];
 
     protected function casts(): array

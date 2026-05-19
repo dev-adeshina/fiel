@@ -16,6 +16,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use App\Filament\Resources\MenuItems\RelationManagers\VariantsRelationManager;
+use App\Filament\Resources\MenuItems\RelationManagers\ModifiersRelationManager;
+use App\Filament\Resources\MenuItems\RelationManagers\AvailabilitiesRelationManager;
+
 class MenuItemResource extends Resource
 {
     protected static ?string $model = MenuItem::class;
@@ -39,7 +43,11 @@ class MenuItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            VariantsRelationManager::class,
+
+            ModifiersRelationManager::class,
+
+            AvailabilitiesRelationManager::class,
         ];
     }
 

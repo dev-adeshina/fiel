@@ -10,13 +10,34 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+
 class MenuItemAvailabilitiesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                //
+            ->columns([                
+                TextColumn::make('description')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('day_of_week')
+                    ->searchable(),
+
+
+                TextColumn::make('start_time')
+                    ->searchable(),
+
+
+                TextColumn::make('end_time')
+                    ->searchable(),
+
+                IconColumn::make('is_available')
+                    ->boolean(),
+
+
             ])
             ->filters([
                 TrashedFilter::make(),

@@ -19,6 +19,7 @@ class MenuItem extends Model
 
     protected $fillable = [
         'uuid',
+        'menu_id',
         'menu_category_id',
         'name',
         'slug',
@@ -51,6 +52,11 @@ class MenuItem extends Model
 
     protected $appends = ['currently_available',];
 
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(MenuCategory::class, 'menu_category_id');
@@ -80,4 +86,7 @@ class MenuItem extends Model
     {
         return MenuItemFactory::new();
     }
+
+    
+
 }
